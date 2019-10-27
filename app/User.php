@@ -42,4 +42,10 @@ class User extends Authenticatable
     {
         return is_null(Auth::user()->role)?false:true;
     }
+
+    public function specialties()
+    {
+        return $this->belongsToMany(Specialties::class,'speciality_enrollments','user_id');
+    }
+
 }
