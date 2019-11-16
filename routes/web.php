@@ -22,3 +22,5 @@ Route::get('/users/all','AdminController@showAllUsers')->name('show.all.users');
 Route::get('/user/{user}/change/status','AdminController@changeUserStatus')->name('admin.user.change.status');
 
 Route::get('/user/home', 'UserController@index')->name('user.home');
+Route::resource('specialities', 'SpecialityController');
+Route::resource('specialitiesenrollment', 'SpecialityEnrollmentController');

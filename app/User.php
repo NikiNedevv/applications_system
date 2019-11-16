@@ -43,9 +43,16 @@ class User extends Authenticatable
         return is_null(Auth::user()->role)?false:true;
     }
 
-    public function specialties()
+    public function specialities()
     {
-        return $this->belongsToMany(Specialties::class,'speciality_enrollments','user_id');
+        return $this->belongsToMany(Specialities::class,'specialitiesenrollments','user_id');
     }
-
+    public function subjects()
+    {
+        return $this->belongsToMany(Subjects::class,'specialitiesenrollments','user_id'); 
+    }
+    public function testsessions()
+    {
+        return $this->belongsToMany(Subjects::class,'specialitiesenrollments','user_id'); 
+    }
 }

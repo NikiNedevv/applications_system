@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Speciality;
 
 class SpecialityController extends Controller
 {
@@ -13,7 +14,9 @@ class SpecialityController extends Controller
      */
 	 public function index()
 	 {
+        $specialities = Speciality::all();
 
+            return view('specialities.index', compact('specialities'));
 	 }
 
      /**
@@ -23,7 +26,7 @@ class SpecialityController extends Controller
      */
      public function create()
      {
-        //
+        return view('specialities.create');
      }
 
     /**
@@ -34,7 +37,12 @@ class SpecialityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Speciality::create([
+        'name' => $request->speciality_name,
+       ]);
+
+       return redirect()->route('specialities.index')
+                ->withMessage('Speciality created successfully');
     }
 
     /**
