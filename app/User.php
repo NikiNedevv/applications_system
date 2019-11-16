@@ -42,4 +42,17 @@ class User extends Authenticatable
     {
         return is_null(Auth::user()->role)?false:true;
     }
+
+    public function specialities()
+    {
+        return $this->belongsToMany(Specialities::class,'specialitiesenrollments','user_id');
+    }
+    public function subjects()
+    {
+        return $this->belongsToMany(Subjects::class,'specialitiesenrollments','user_id'); 
+    }
+    public function testsessions()
+    {
+        return $this->belongsToMany(Subjects::class,'specialitiesenrollments','user_id'); 
+    }
 }
