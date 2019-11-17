@@ -30,7 +30,7 @@
 	
 	<div class="limiter">
         
-		<div class="container-login100" style="background-image:  url({{ asset('images/images/bg-01.jpg') }})">
+		<div class="container-login100" >
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
 				<div class="login100-form-title p-b-49" >{{ __('Register') }}</div>
 				<form class="login100-form validate-form" method="POST" action="{{ route('register') }}">
@@ -83,7 +83,7 @@
 						
 					</div>
 					
-					
+					<br></br>
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
@@ -94,8 +94,8 @@
 					</div>
 
 					
-
-						<a href="{{ route('login') }}" class="txt2">
+							<br></br>
+						<a href="{{ route('login') }}" class="btn btn-info">
 							Sign In
 						</a>
 					</div>

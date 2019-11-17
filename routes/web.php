@@ -23,4 +23,4 @@ Route::get('/user/{user}/change/status','AdminController@changeUserStatus')->nam
 
 Route::get('/user/home', 'UserController@index')->name('user.home');
 Route::resource('specialities', 'SpecialityController');
-Route::resource('specialitiesenrollment', 'SpecialityEnrollmentController');
+Route::resource('subjects', 'SubjectController');

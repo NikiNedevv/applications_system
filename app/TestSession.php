@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class TestSession extends Model
 {
-    public function course()
+    public function specialities()
     {
     	return $this->belongsToMany('App\Speciality');
     }
+    
 }

@@ -6,8 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subject extends Model
 {
-    public function course()
+	protected $fillable = ['name', 'speciality_id'];
+    // public function specialities()
+    // {
+    // 	return $this->belongsToMany('App\Speciality', 'specialitiesenrollments', 'speciality_id', 'subject_id');
+    // }
+    // public function user()
+    // {
+    //     return $this->belongsToMany('App\User', 'specialitiesenrollments', 'subject_id', 'user_id');
+    // }
+
+    public function speciality()
     {
-    	return $this->belongsToMany('App\Speciality');
+    	return $this->belongsTo('App\Speciality');
     }
 }

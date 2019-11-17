@@ -45,14 +45,7 @@ class User extends Authenticatable
 
     public function specialities()
     {
-        return $this->belongsToMany(Specialities::class,'specialitiesenrollments','user_id');
+        return $this->belongsToMany(SpecialitiEsenrollment::class,'specialitiesenrollments','user_id');
     }
-    public function subjects()
-    {
-        return $this->belongsToMany(Subjects::class,'specialitiesenrollments','user_id'); 
-    }
-    public function testsessions()
-    {
-        return $this->belongsToMany(Subjects::class,'specialitiesenrollments','user_id'); 
-    }
+    
 }

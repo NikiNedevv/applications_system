@@ -29,10 +29,10 @@
 
     <link rel="stylesheet" type="text/css" href="{{asset('css/css/main.css')}}">
     
-    <div class="limiter">
+    <div class="limiter" >
         
         <div class="container-login100" >
-            <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54" style="background-image:  url({{ asset('images/images/bg-01.jpg') }})">
+            <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
                 <div class="login100-form-title p-b-49"  >{{ __('Login') }}</div>
                 <form class="login100-form validate-form" method="POST" action="{{ route('login') }}">
                         @csrf
@@ -64,7 +64,15 @@
                                 @enderror
                     </div>
                    
-                    
+                    <div class="text-right p-t-8 p-b-31">
+                        
+                            @if (Route::has('password.request'))
+                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        {{ __('Forgot Your Password?') }}
+                                    </a>
+                                @endif
+                        
+                    </div>
                     
                     <div class="container-login100-form-btn">
                         <div class="wrap-login100-form-btn">
@@ -75,11 +83,7 @@
 
                         </div>
                     </div>
-                    @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
+                    <br></br>
                     <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">

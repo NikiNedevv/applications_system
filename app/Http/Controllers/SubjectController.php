@@ -3,24 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use App\Speciality;
 use App\Subject;
-
-
-class SpecialityEnrollmentController extends Controller
+use App\Speciality;
+class SubjectController extends Controller
 {
-	 /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-	 public function index()
-	 {
+    public function index()
+     {
         $subjects = Subject::all();
         return view ('subjects.index', compact('subjects'));
-        dd()
-	 }
+      
+     }
 
      /**
      * Show the form for creating a new resource.
@@ -43,7 +40,12 @@ class SpecialityEnrollmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Subject::create([
+                    'name' => $request->subject_name, 
+                    'speciality_id' => $request->speciality_id]);
+
+        return redirect()->route('subjects.index')
+                ->withMessage('Subject created successfully');
     }
 
     /**
@@ -54,7 +56,9 @@ class SpecialityEnrollmentController extends Controller
      */
     public function show($id)
     {
-        //
+       $subject = Subject::find($id);
+
+       return view('subjects.show', compact('subject'));
     }
 
     /**
