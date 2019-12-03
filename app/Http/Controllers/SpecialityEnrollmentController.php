@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Speciality;
 use App\Subject;
+use App\SpecialityEnrollment;
+use App\Exam;
+use Auth;
 
 
 class SpecialityEnrollmentController extends Controller
@@ -17,9 +20,9 @@ class SpecialityEnrollmentController extends Controller
      */
 	 public function index()
 	 {
-        $subjects = Subject::all();
-        return view ('subjects.index', compact('subjects'));
-        dd()
+       $enrollments = SpecialityEnrollment::with('user','exam','exam.subject')->get();
+      
+       return view('admin.enrollments', compact('enrollments')); 
 	 }
 
      /**
@@ -30,11 +33,23 @@ class SpecialityEnrollmentController extends Controller
      public function create()
      {
         $specialities = Speciality::all();
-        $specialities_arr = $specialities->pluck('name', 'id');
-
-       return view('subjects.create', compact('specialities_arr'));
+        
+        return view('user.enrollment_create', compact('specialities'));
      }
 
+     public function ajaxExams(Request $request){
+        if($request->subject_request > 0){
+            $speciality_id = $request->speciality_id;
+            $subjects = Subject::with('specialities')->whereHas('specialities',function($q) use ($speciality_id){
+                $q->where('speciality_id',$speciality_id);
+            })->get()->toArray();
+
+            return response()->json($subjects);
+        }
+        $exams = Exam::where('subject_id',$request->subject_id)->get()->toArray();
+
+        return response()->json($exams);
+     }
     /**
      * Store a newly created resource in storage.
      *
@@ -43,7 +58,13 @@ class SpecialityEnrollmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newEnrollment = new SpecialityEnrollment;
+        $newEnrollment->user_id = Auth::user()->id;
+        $newEnrollment->exam_id = $request->exam;
+        $newEnrollment->session_num = $request->session;
+        $newEnrollment->save();
+
+        return 'success'; 
     }
 
     /**
@@ -77,7 +98,11 @@ class SpecialityEnrollmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $updEnrollment = SpecialityEnrollment::find($id);
+        $updEnrollment->score = $request->grade;
+        $updEnrollment->save();
+
+        return back()->with('success','Successfully edited enrolment');
     }
 
     /**
@@ -88,6 +113,10 @@ class SpecialityEnrollmentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $specialitiesEnrollments = SpecialityEnrollment::find($id);
+
+        $specialitiesEnrollments->delete();
+
+        return back()->with('success','Successfully deleted enrolment');
     }
 }

@@ -16,4 +16,12 @@ class Speciality extends Model
     {
         return $this->belongsToMany('App\User', 'specialitiesenrollments', 'speciality_id', 'user_id');
     }
+
+    public function subjects(){
+    	return $this->belongsToMany('App\Subject','subject_specialities','id','subject_id');
+    }
+
+    public function exams(){
+    	return $this->belongsToMany('App\Exam','exams_assigned','id','exam_id');
+    }
 }

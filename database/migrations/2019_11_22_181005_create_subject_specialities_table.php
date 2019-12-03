@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddSpecialityIdToSubjectsTable extends Migration
+class CreateSubjectSpecialitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,13 @@ class AddSpecialityIdToSubjectsTable extends Migration
      */
     public function up()
     {
-        Schema::table('subjects', function (Blueprint $table) {
-             $table->unsignedBigInteger('speciality_id');
+        Schema::create('subject_specialities', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('subject_id');
+            $table->unsignedBigInteger('speciality_id');
+            $table->timestamps();
+
+            $table->foreign('subject_id')->references('id')->on('subjects');
             $table->foreign('speciality_id')->references('id')->on('specialities');
         });
     }
@@ -26,8 +31,6 @@ class AddSpecialityIdToSubjectsTable extends Migration
      */
     public function down()
     {
-        Schema::table('subjects', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('subject_specialties');
     }
 }

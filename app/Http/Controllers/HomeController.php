@@ -15,6 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
+
         $this->middleware('auth');
     }
 
@@ -34,3 +35,12 @@ class HomeController extends Controller
         return view('user.home');
     }
 }
+
+SpecialityEnrollment::with('exam','exam.subjects')->whereHas('exam.subjects', function($q){
+    $q->where('subject_id',$userSubject_id);
+})->where('score','>',$userScore)->count();
+
+SpecialityEnrollment::with('exam','exam.subjects')->whereHas('exam.subjects', function($q){
+    $q->where('subject_id',$userSubject_id);
+})->where('score','<',$userScore)->count();
+

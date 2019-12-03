@@ -14,8 +14,8 @@ class SpecialityController extends Controller
      */
 	 public function index()
 	 {
-        $specialities = Speciality::all();
-
+        $specialities = Speciality::with('subject','exams')->get();
+        
             return view('specialities.index', compact('specialities'));
 	 }
 
@@ -87,6 +87,6 @@ class SpecialityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
 }

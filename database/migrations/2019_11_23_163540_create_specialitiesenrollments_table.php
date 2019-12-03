@@ -17,17 +17,12 @@ class CreateSpecialitiesenrollmentsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('speciality_id');
-            $table->foreign('speciality_id')->references('id')->on('specialities');
-            $table->unsignedBigInteger('ts_id');
-            $table->foreign('ts_id')->references('id')->on('testsessions');
-            $table->unsignedBigInteger('subject_id');
-            $table->foreign('subject_id')->references('id')->on('subjects');
-            $table->unsignedBigInteger('exam_id');
-            $table->foreign('exam_id')->references('id')->on('exams');
-            $table->integer('grade')->nullable();
+            $table->unsignedBigInteger('exam_assigned_id');
+            $table->integer('session_num')->nullable();
+            $table->integer('score')->nullable();
             $table->timestamps();
 
+            $table->foreign('exam_assigned_id')->references('id')->on('exams_assigned');
         });
     }
 

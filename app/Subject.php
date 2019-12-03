@@ -16,8 +16,12 @@ class Subject extends Model
     //     return $this->belongsToMany('App\User', 'specialitiesenrollments', 'subject_id', 'user_id');
     // }
 
-    public function speciality()
-    {
-    	return $this->belongsTo('App\Speciality');
+    // public function speciality()
+    // {
+    // 	return $this->belongsTo('App\Speciality');
+    // }
+
+    public function specialities(){
+        return $this->belongsToMany('App\Speciality','subject_specialities','subject_id','speciality_id');
     }
 }

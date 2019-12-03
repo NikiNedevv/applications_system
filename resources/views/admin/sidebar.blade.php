@@ -9,6 +9,8 @@
             </b> </a></li>
             <li><a href="{{ route('subjects.index') }}"><i class="menu-icon icon-tasks"></i>Subjects<b class="label orange pull-right">
             </b> </a></li>
+            <li><a href="{{ route('enrollments.index') }}"><i class="menu-icon icon-tasks"></i>Enrollments<b class="label orange pull-right">
+            </b> </a></li>
         </ul>
         <!--/.widget-nav-->
 

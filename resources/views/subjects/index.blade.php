@@ -21,7 +21,16 @@
 	</tr>
 	@foreach( $subjects as $subject )
 		<tr>
-			<td>{{ $subject->speciality-> name }}</td>
+			<td>
+				@if($subject->specialities()->exists())
+					@foreach($subject->specialities as $speciality)
+						{{$speciality->name}}
+						@if(!$loop->last)
+							,
+						@endif
+					@endforeach
+				@endif
+			</td>
 			<td>
 				<a href="{{ route('subjects.show', $subject->id)}}">{{ $subject->name }}</a>
 			</td>			
